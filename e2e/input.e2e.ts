@@ -14,15 +14,22 @@ describe('Input', () => {
     await expect(element(by.text('Enter any year'))).toBeVisible();
   });
 
+  const typedYear = '2000';
   it('should show the typed year at the top', async () => {
-    // Write test here
+    await element(by.id('yearTextInput')).typeText(typedYear);
+
+    await expect(element(by.id('resultText'))).toHaveText(typedYear);
   });
 
   it('should remain at a four digit number when more digits are typed', async () => {
-    // Write test here
+    await element(by.id('yearTextInput')).typeText('000');
+
+    await expect(element(by.id('resultText'))).toHaveText(typedYear);
   });
 
   it('should show zero if no year is present in the input', async () => {
-    // Write test here
+    await element(by.id('yearTextInput')).clearText();
+
+    await expect(element(by.id('resultText'))).toHaveText('0');
   });
 });
